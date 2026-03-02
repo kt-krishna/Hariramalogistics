@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hari Rama Logistics - Local transport, Pan India freight, FTL, LR & documentation.">
+    <title>Services | Hari Rama Logistics</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .page-hero { padding: 5rem 1rem 2rem; text-align: center; }
+        .page-hero h1 { font-size: clamp(1.75rem, 5vw, 2.5rem); margin-bottom: 0.5rem; }
+        .page-hero p { color: var(--gray); font-size: 1rem; }
+        section { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+        @media (min-width: 600px) { section { padding: 3rem 1.5rem; } }
+        .section-title { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 700; margin-bottom: 0.5rem; }
+        .section-sub { color: var(--gray); font-size: 0.95rem; margin-bottom: 1.5rem; }
+        .services-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+        @media (min-width: 500px) { .services-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } }
+        .service-card {
+            background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 14px;
+            padding: 1.4rem; transition: border-color 0.2s, transform 0.2s;
+        }
+        .service-card:hover { border-color: rgba(220, 38, 38, 0.35); transform: translateY(-2px); }
+        .service-card.featured { border-color: rgba(220, 38, 38, 0.4); background: linear-gradient(145deg, rgba(220, 38, 38, 0.08) 0%, var(--navy-card) 100%); }
+        .service-card .icon { width: 42px; height: 42px; background: rgba(220, 38, 38, 0.18); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 0.75rem; }
+        .service-card .label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--red-soft); margin-bottom: 0.25rem; }
+        .service-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+        .service-card p { color: var(--gray); font-size: 0.88rem; line-height: 1.6; }
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+        @media (min-width: 600px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; } }
+        .gallery-item {
+            aspect-ratio: 4/3; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 12px;
+            overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative;
+        }
+        .gallery-item.placeholder { background: linear-gradient(145deg, rgba(220,38,38,0.1) 0%, var(--navy-card) 100%); }
+        .gallery-item .caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.5rem; background: rgba(0,0,0,0.7); font-size: 0.7rem; font-weight: 600; text-align: center; color: var(--white); }
+        .routes-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
+        .routes-tags span { padding: 0.4rem 0.75rem; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; font-size: 0.8rem; color: var(--gray-light); }
+        .cta-wrap { text-align: center; margin-top: 2rem; }
+        .vehicle-types { margin-bottom: 3rem; }
+        .vehicle-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        @media (min-width: 600px) { .vehicle-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 900px) { .vehicle-grid { grid-template-columns: repeat(6, 1fr); gap: 0.75rem; } }
+        .vehicle-card {
+            background: var(--navy-card);
+            border: 1px solid var(--navy-border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .vehicle-card:hover { border-color: rgba(220, 38, 38, 0.35); transform: translateY(-2px); }
+        .vehicle-card .img-wrap {
+            aspect-ratio: 1;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem;
+        }
+        .vehicle-card .img-wrap img { width: 100%; height: 100%; object-fit: contain; }
+        .vehicle-card .label { padding: 0.6rem 0.5rem; font-size: 0.7rem; font-weight: 600; text-align: center; color: var(--white); background: rgba(0,0,0,0.4); line-height: 1.2; }
+        .clients-section { background: rgba(0,0,0,0.2); border-radius: 16px; padding: 2rem 1rem; margin-bottom: 3rem; }
+        .clients-section .section-title { margin-bottom: 0.5rem; }
+        .clients-section .section-sub { margin-bottom: 1.25rem; }
+        .clients-list { display: grid; grid-template-columns: 1fr; gap: 0.5rem 1.5rem; }
+        @media (min-width: 500px) { .clients-list { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 700px) { .clients-list { grid-template-columns: repeat(3, 1fr); } }
+        .clients-list li { list-style: none; display: flex; align-items: center; gap: 0.5rem; color: var(--gray-light); font-size: 0.9rem; }
+        .clients-list li::before { content: ''; display: inline-block; width: 18px; height: 18px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2322c55e'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") no-repeat center; flex-shrink: 0; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    <div class="grid-overlay"></div>
+    <script>var SOCIAL = { whatsapp: 'https://wa.me/917715029932', facebook: 'https://www.facebook.com/yourpage', instagram: 'https://www.instagram.com/yourprofile', linkedin: 'https://www.linkedin.com/company/yourcompany', twitter: 'https://twitter.com/yourhandle' };</script>
+    <div class="nav-backdrop" id="nav-backdrop"></div>
+    <nav>
+        <a href="index.html" class="logo"><span class="logo-img-wrap"><img src="logo.png" alt="Hari Rama Logistics" class="nav-logo-img"></span> HARI RAMA <span>LOGISTICS</span></a>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="contact.html">Contact</a>
+            <a href="contact.html" class="nav-cta">Get in Touch</a>
+        </div>
+    </nav>
+    <header class="page-hero">
+        <h1>Our Services</h1>
+        <p>Local transportation and pan-India freight — one trusted partner.</p>
+    </header>
+    <section>
+        <h2 class="section-title">What We Offer</h2>
+        <p class="section-sub">From Kalyan, Thane & Mumbai to every major city in India.</p>
+        <div class="services-grid">
+            <div class="service-card featured">
+                <div class="label">Best for local</div>
+                <div class="icon">🚚</div>
+                <h3>Local Transportation</h3>
+                <p>Kalyan, Thane, Mumbai, Maharashtra — same-day and scheduled local cargo. Quick, safe, reliable.</p>
+            </div>
+            <div class="service-card featured">
+                <div class="label">Nationwide</div>
+                <div class="icon">🇮🇳</div>
+                <h3>Pan India Freight</h3>
+                <p>Full truck load, part load, door-to-door. Connect to every major city and industrial hub.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">📦</div>
+                <h3>Full Truck Load (FTL)</h3>
+                <p>Dedicated trucks for full-load consignments. Safe, tracked, on time.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon">📄</div>
+                <h3>LR & Documentation</h3>
+                <p>Proper LR copies, bills, e-way support, GST-compliant documentation.</p>
+            </div>
+        </div>
+    </section>
+    <section class="vehicle-types">
+        <h2 class="section-title">Vehicle Types</h2>
+        <p class="section-sub">We operate a range of vehicles for local and long-distance freight.</p>
+        <div class="vehicle-grid">
+            <div class="vehicle-card">
+                <div class="img-wrap"><img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=200" alt="Closed body container truck"></div>
+                <div class="label">Closed Body Container</div>
+            </div>
+            <div class="vehicle-card">
+                <div class="img-wrap"><img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=200" alt="Container 20 and 40 feet"></div>
+                <div class="label">Container 20 & 40 Ft</div>
+            </div>
+            <div class="vehicle-card">
+                <div class="img-wrap"><img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=200" alt="Single axle truck"></div>
+                <div class="label">Single Axle</div>
+            </div>
+            <div class="vehicle-card">
+                <div class="img-wrap"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=200" alt="Double axle truck"></div>
+                <div class="label">Double Axle</div>
+            </div>
+            <div class="vehicle-card">
+                <div class="img-wrap"><img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=200" alt="Open body truck"></div>
+                <div class="label">Open Body Truck</div>
+            </div>
+            <div class="vehicle-card">
+                <div class="img-wrap"><img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=200" alt="Pickup tempo for local"></div>
+                <div class="label">Pickup / Tempo (Local)</div>
+            </div>
+        </div>
+    </section>
+    <section class="clients-section">
+        <h2 class="section-title">Our Precious Clients</h2>
+        <p class="section-sub">We work with reputed companies across the Indian market. We transport a wide range of products such as:</p>
+        <ul class="clients-list">
+            <li>FMCG</li>
+            <li>Food Products</li>
+            <li>White Goods</li>
+            <li>Electrical & Electronic Items</li>
+            <li>Chemicals</li>
+            <li>Automotives</li>
+            <li>Pharmaceuticals</li>
+            <li>Footwear Material</li>
+            <li>Textiles & Apparels</li>
+        </ul>
+    </section>
+    <section class="gallery">
+        <h2 class="section-title">Routes We Serve</h2>
+        <p class="section-sub">From our base in Kalyan, Thane & Mumbai to pan-India destinations.</p>
+        <div class="routes-tags">
+            <span>Mumbai</span><span>Thane</span><span>Kalyan</span><span>Bhiwandi</span><span>Pune</span><span>Nashik</span><span>Delhi NCR</span><span>Noida</span><span>Gurgaon</span><span>Bangalore</span><span>Hyderabad</span><span>Chennai</span><span>Kolkata</span><span>Ahmedabad</span><span>Surat</span><span>Vadodara</span><span>Bhopal</span><span>Indore</span><span>Nagpur</span><span>Jaipur</span><span>Chandigarh</span><span>Kochi</span>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400" alt="Freight"><span class="caption">Thane → Pune</span></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=400" alt="Transport"><span class="caption">Mumbai → Noida</span></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400" alt="Cargo"><span class="caption">Bhiwandi → Bangalore</span></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=400" alt="Logistics"><span class="caption">Pune → Bhopal</span></div>
+        </div>
+        <div class="cta-wrap"><a href="contact.html" class="btn btn-primary">Get a quote</a></div>
+    </section>
+    <footer>
+        <div class="logo">HARI RAMA <span>LOGISTICS</span></div>
+        <p>Delivering Excellence · Kalyan, Thane, Mumbai, Maharashtra</p>
+        <div class="social-links">
+            <a href="#" id="f-wa" title="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+            <a href="#" id="f-fb" title="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+            <a href="#" id="f-in" title="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C8.333.014 8.741 0 12 0z"/></svg></a>
+            <a href="#" id="f-li" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+            <a href="#" id="f-tw" title="Twitter" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
+        <p style="margin-top:0.75rem;font-size:0.8rem;">© 2025 Hari Rama Logistics.</p>
+    </footer>
+    <script>
+        (function(){ var t=document.getElementById('nav-toggle'),b=document.getElementById('nav-backdrop');
+            if(t)t.onclick=function(){ document.body.classList.toggle('nav-open'); };
+            if(b)b.onclick=function(){ document.body.classList.remove('nav-open'); };
+            document.querySelectorAll('.nav-links a').forEach(function(a){ a.onclick=function(){ document.body.classList.remove('nav-open'); }; });
+        })();
+        (function(){ var s=window.SOCIAL||{}; ['whatsapp','facebook','instagram','linkedin','twitter'].forEach(function(n,i){ var id='f-'+(n==='whatsapp'?'wa':n==='facebook'?'fb':n==='instagram'?'in':n==='linkedin'?'li':'tw'); var a=document.getElementById(id); if(a)a.href=s[n]||'#'; });
+        })();
+    </script>
+</body>
+</html>

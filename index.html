@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Hari Rama Logistics - Local & Pan India freight from Kalyan, Thane, Mumbai. Delivering Excellence.">
     <title>Hari Rama Logistics | Delivering Excellence</title>
-    <link rel="icon" href="logo.png" type="image/png">
-    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" href="logo.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="logo.png" sizes="180x180">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -76,12 +76,24 @@
             text-decoration: none;
         }
         .logo span { color: var(--red-soft); }
+        .logo-img-wrap {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            background: rgba(255,255,255,0.06);
+            border-radius: 10px;
+            border: 1px solid var(--navy-border);
+        }
         .nav-logo-img {
-            height: 36px;
+            height: 28px;
             width: auto;
-            display: block;
+            max-width: 32px;
             object-fit: contain;
         }
+        @media (min-width: 480px) { .nav-logo-img { height: 32px; max-width: 38px; } }
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -103,21 +115,46 @@
             font-weight: 600;
         }
         .nav-cta:hover { background: #ef4444; color: white !important; }
-        @media (max-width: 768px) {
-            .nav-links { gap: 1rem; }
-            .nav-links a:not(.nav-cta) { display: none; }
+        .nav-toggle {
+            display: flex; flex-direction: column; justify-content: center; gap: 5px;
+            width: 40px; height: 40px; padding: 8px;
+            background: transparent; border: 1px solid var(--navy-border); border-radius: 8px;
+            cursor: pointer; z-index: 101;
         }
+        .nav-toggle span { display: block; height: 2px; background: var(--gray-light); border-radius: 1px; transition: transform 0.3s, opacity 0.3s; }
+        body.nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+        body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        @media (min-width: 769px) { .nav-toggle { display: none; } }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed; top: 0; right: 0; bottom: 0; width: min(280px, 85vw);
+                flex-direction: column; gap: 0; padding: 4.5rem 1.5rem 1.5rem;
+                background: var(--navy-card); border-left: 1px solid var(--navy-border);
+                box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+            }
+            body.nav-open .nav-links { display: flex; }
+            .nav-links a { padding: 0.85rem 0; border-bottom: 1px solid var(--navy-border); font-size: 1rem; }
+            .nav-links .nav-cta { margin-top: 0.5rem; }
+        }
+        .nav-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 99; }
+        body.nav-open .nav-backdrop { display: block; }
+        @media (min-width: 769px) { .nav-backdrop { display: none !important; } }
+        @media (max-width: 768px) { .nav-logo-img { height: 28px; } .logo { font-size: 1rem; } }
 
-        /* Hero - cleaner */
+        /* Hero - mobile first */
         .hero {
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 5rem 1.5rem 4rem;
+            padding: 4.5rem 1rem 3rem;
         }
+        @media (min-width: 600px) { .hero { padding: 5rem 1.5rem 4rem; } }
         .hero .badge {
             display: inline-flex;
             align-items: center;
@@ -157,14 +194,16 @@
         .btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
-            padding: 0.85rem 1.6rem;
+            padding: 0.85rem 1.5rem;
             border-radius: 10px;
             font-weight: 600;
             font-size: 0.95rem;
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
         }
+        @media (max-width: 480px) { .hero .cta { width: 100%; } .hero .cta .btn { width: 100%; } }
         .btn-primary {
             background: var(--red-soft);
             color: white;
@@ -190,8 +229,9 @@
         section {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 4.5rem 1.5rem;
+            padding: 3rem 1rem;
         }
+        @media (min-width: 600px) { section { padding: 4.5rem 1.5rem; } }
         .section-title {
             font-size: clamp(1.7rem, 4vw, 2.35rem);
             font-weight: 700;
@@ -310,9 +350,9 @@
             color: var(--gray-light);
         }
 
-        /* Social links */
         .social-row {
             display: flex;
+            flex-direction: row;
             align-items: center;
             gap: 0.5rem;
             flex-wrap: wrap;
@@ -321,12 +361,13 @@
         .social-row span {
             font-size: 0.85rem;
             color: var(--gray);
-            margin-right: 0.25rem;
+            white-space: nowrap;
         }
         .social-links {
-            display: flex;
-            gap: 0.5rem;
+            display: inline-flex;
+            flex-direction: row;
             flex-wrap: wrap;
+            gap: 0.4rem;
         }
         .social-links a {
             display: flex;
@@ -406,6 +447,61 @@
         }
         .form-success.show { display: block; }
 
+        /* Reviews */
+        .reviews { background: rgba(0,0,0,0.2); }
+        .reviews-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+        @media (min-width: 600px) { .reviews-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); } }
+        .review-card {
+            background: var(--navy-card);
+            border: 1px solid var(--navy-border);
+            border-radius: 14px;
+            padding: 1.35rem;
+        }
+        .review-card .review-photo { width: 100%; aspect-ratio: 16/9; background: var(--navy); border-radius: 10px; margin-bottom: 0.75rem; overflow: hidden; }
+        .review-card .review-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .review-card .route { font-size: 0.75rem; font-weight: 600; color: var(--red-soft); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+        .review-card p { color: var(--gray); font-size: 0.9rem; line-height: 1.65; margin-bottom: 0.75rem; }
+        .review-card .name { font-size: 0.9rem; font-weight: 600; color: var(--white); }
+        .review-cta { margin-top: 1.25rem; }
+        /* Gallery / Our Work */
+        .gallery { padding-top: 2rem; }
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+        @media (min-width: 600px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); gap: 1rem; } }
+        .gallery-item {
+            aspect-ratio: 4/3;
+            background: var(--navy-card);
+            border: 1px solid var(--navy-border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-item .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 0.6rem 0.5rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-align: center;
+            color: var(--white);
+        }
+        .gallery-item.placeholder { background: linear-gradient(145deg, rgba(220,38,38,0.1) 0%, var(--navy-card) 100%); }
+        .gallery-item.placeholder .caption { background: rgba(0,0,0,0.6); }
+        .routes-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 1.5rem; }
+        .routes-tags span { padding: 0.4rem 0.75rem; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; font-size: 0.8rem; color: var(--gray-light); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .clients-section { background: rgba(0,0,0,0.2); border-radius: 16px; padding: 2rem 1rem; margin: 3rem 0; }
+        .clients-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.4rem 1rem; }
+        @media (min-width: 600px) { .clients-list { grid-template-columns: repeat(3, 1fr); } }
+        .clients-list li { list-style: none; display: flex; align-items: center; gap: 0.5rem; color: var(--gray-light); font-size: 0.85rem; }
+        .clients-list li::before { content: ''; display: inline-block; width: 16px; height: 16px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2322c55e'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E") no-repeat center; flex-shrink: 0; }
+
         /* Footer */
         footer {
             border-top: 1px solid var(--navy-border);
@@ -433,16 +529,21 @@
         };
     </script>
 
+    <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
     <nav>
-        <a href="#" class="logo">
-            <img src="logo.png" alt="Hari Rama Logistics" class="nav-logo-img">
+        <a href="index.html" class="logo">
+            <span class="logo-img-wrap"><img src="logo.png" alt="Hari Rama Logistics" class="nav-logo-img"></span>
             HARI RAMA <span>LOGISTICS</span>
         </a>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Open menu">
+            <span></span><span></span><span></span>
+        </button>
         <div class="nav-links">
-            <a href="#services">Services</a>
-            <a href="#why-us">Why Us</a>
-            <a href="#contact">Contact</a>
-            <a href="#contact" class="nav-cta">Get in Touch</a>
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="contact.html">Contact</a>
+            <a href="contact.html" class="nav-cta">Get in Touch</a>
         </div>
     </nav>
 
@@ -452,7 +553,7 @@
         <p class="tagline">Local transportation in Kalyan, Thane & Mumbai — and pan-India freight. Reliable, on-time, with transparent billing.</p>
         <div class="cta">
             <a href="tel:7715029932" class="btn btn-primary">Call Now</a>
-            <a href="#contact" class="btn btn-outline">Contact Us</a>
+            <a href="contact.html" class="btn btn-outline">Contact Us</a>
         </div>
     </header>
 
@@ -483,6 +584,56 @@
                 <p>Proper LR copies, bills, e-way support, and GST-compliant documentation.</p>
             </div>
         </div>
+        <p style="text-align:center;margin-top:1.5rem;"><a href="services.html" class="btn btn-outline">View all services</a></p>
+    </section>
+
+    <section class="gallery">
+        <h2 class="section-title">Routes We Serve</h2>
+        <p class="section-sub">From our base in Kalyan, Thane & Mumbai to pan-India destinations.</p>
+        <div class="routes-tags">
+            <span>Mumbai</span><span>Thane</span><span>Kalyan</span><span>Bhiwandi</span><span>Pune</span><span>Nashik</span><span>Delhi NCR</span><span>Noida</span><span>Gurgaon</span><span>Bangalore</span><span>Hyderabad</span><span>Chennai</span><span>Kolkata</span><span>Ahmedabad</span><span>Surat</span><span>Vadodara</span><span>Bhopal</span><span>Indore</span><span>Nagpur</span><span>Jaipur</span><span>Chandigarh</span><span>Kochi</span>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400" alt="Freight"><span class="caption">Thane → Pune</span></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=400" alt="Transport"><span class="caption">Mumbai → Noida</span></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400" alt="Cargo"><span class="caption">Bhiwandi → Bangalore</span></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=400" alt="Logistics"><span class="caption">Pune → Bhopal</span></div>
+        </div>
+    </section>
+
+    <section class="clients-section">
+        <h2 class="section-title">Our Precious Clients</h2>
+        <p class="section-sub">We transport a wide range of products across industries.</p>
+        <ul class="clients-list">
+            <li>FMCG</li><li>Food Products</li><li>White Goods</li><li>Electrical & Electronic</li><li>Chemicals</li><li>Automotives</li><li>Pharmaceuticals</li><li>Footwear Material</li><li>Textiles & Apparels</li>
+        </ul>
+        <p style="text-align:center;margin-top:1rem;"><a href="services.html" class="btn btn-outline">View vehicle types &amp; services</a></p>
+    </section>
+
+    <section id="reviews" class="reviews">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <p class="section-sub">Real feedback from businesses who trust us with their cargo.</p>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-photo"><img src="review1.jpg" alt="" onerror="this.parentElement.style.display='none'"></div>
+                <div class="route">Thane → Pune (Local)</div>
+                <p>We needed regular movement of goods from Thane to Pune. Hari Rama Logistics has been punctual and the billing is clear. No hidden charges. Recommended for local transport.</p>
+                <div class="name">— Rajesh M., Thane</div>
+            </div>
+            <div class="review-card">
+                <div class="review-photo"><img src="review2.jpg" alt="" onerror="this.parentElement.style.display='none'"></div>
+                <div class="route">Mumbai → Noida (Interstate)</div>
+                <p>Sent full truck load from Mumbai to Noida. Delivery was on time, LR and documentation were proper. Will use again for interstate freight.</p>
+                <div class="name">— Priya S., Mumbai</div>
+            </div>
+            <div class="review-card">
+                <div class="review-photo"><img src="review3.jpg" alt="" onerror="this.parentElement.style.display='none'"></div>
+                <div class="route">Bhiwandi → Bangalore</div>
+                <p>Good experience with Bhiwandi to Bangalore consignment. Communication was clear and the team followed up till delivery. Fair rates.</p>
+                <div class="name">— Amit K., Bhiwandi</div>
+            </div>
+        </div>
+        <p style="text-align:center;margin-top:1.5rem;"><a href="reviews.html" class="btn btn-outline">Read more reviews</a></p>
     </section>
 
     <section id="why-us" class="why-us">
@@ -526,8 +677,8 @@
         <div class="contact-wrap">
             <div class="contact-info">
                 <h3>Hari Rama Logistics</h3>
-                <p>Your reliable logistics partner. Local transportation in Kalyan, Thane, Mumbai — and pan-India freight.</p>
-                <p class="location-text" style="margin-top:0.75rem;"><strong>We are from</strong> Kalyan, Thane, Mumbai, Maharashtra.</p>
+                <p>Kalyan, Thane, Mumbai, Maharashtra. Phone: <a href="tel:7715029932">77150 29932</a> / <a href="tel:7208092010">72080 92010</a></p>
+                <p><a href="mailto:harirama.logi@gmail.com">harirama.logi@gmail.com</a></p>
                 <div class="social-row">
                     <span>Follow us:</span>
                     <div class="social-links">
@@ -546,48 +697,7 @@
                 <p><strong>GSTIN</strong><br>27AHEPT8913C1Z8</p>
             </div>
         </div>
-
-        <!-- Enquiry form: Netlify Forms (100/month free). Works only after you host this site on Netlify. -->
-        <div class="enquiry-section" id="enquiry-form">
-            <h3>Send an Enquiry</h3>
-            <p class="form-intro">Fill the form below and we'll get back to you soon.</p>
-            <div id="form-success-msg" class="form-success">Thank you! We've received your enquiry and will contact you shortly.</div>
-            <form class="form-box" id="enquiry-form-el" name="enquiry" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/">
-                <input type="hidden" name="form-name" value="enquiry">
-                <p class="form-honey" style="position:absolute;left:-9999px;" aria-hidden="true"><label>Don't fill this: <input name="bot-field"></label></p>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="ename">Name *</label>
-                        <input type="text" id="ename" name="name" placeholder="Your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="ephone">Phone *</label>
-                        <input type="tel" id="ephone" name="phone" placeholder="10-digit mobile" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="eemail">Email *</label>
-                    <input type="email" id="eemail" name="email" placeholder="your@email.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="eservice">Service interested in</label>
-                    <select id="eservice" name="service">
-                        <option value="">Select one</option>
-                        <option value="Local Transportation">Local Transportation (Kalyan / Thane / Mumbai)</option>
-                        <option value="Pan India Freight">Pan India Freight</option>
-                        <option value="Both">Both</option>
-                        <option value="Quote">Get a quote</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="emsg">Message</label>
-                    <textarea id="emsg" name="message" placeholder="Describe your requirement, route, or ask a question..."></textarea>
-                </div>
-                <div class="form-submit">
-                    <button type="submit" class="btn btn-primary">Submit Enquiry</button>
-                </div>
-            </form>
-        </div>
+        <p style="text-align:center;margin-top:1.5rem;"><a href="contact.html" class="btn btn-primary">Send enquiry / Get a quote</a></p>
     </section>
 
     <footer>
@@ -605,6 +715,15 @@
 
     <script>
         (function() {
+            var toggle = document.getElementById('nav-toggle');
+            var backdrop = document.getElementById('nav-backdrop');
+            function openNav() { document.body.classList.add('nav-open'); }
+            function closeNav() { document.body.classList.remove('nav-open'); }
+            if (toggle) toggle.addEventListener('click', function() { document.body.classList.toggle('nav-open'); });
+            if (backdrop) backdrop.addEventListener('click', closeNav);
+            document.querySelectorAll('.nav-links a').forEach(function(a) { a.addEventListener('click', closeNav); });
+        })();
+        (function() {
             var s = window.SOCIAL || {};
             var ids = ['whatsapp','facebook','instagram','linkedin','twitter'];
             ids.forEach(function(name) {
@@ -613,33 +732,6 @@
             });
         })();
 
-        (function() {
-            var successMsg = document.getElementById('form-success-msg');
-            if (window.location.hash === '#contact' && window.location.search.indexOf('enquiry=sent') !== -1 && successMsg) {
-                successMsg.classList.add('show');
-                successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
-            var form = document.getElementById('enquiry-form-el');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    var btn = form.querySelector('button[type="submit"]');
-                    var origText = btn ? btn.textContent : '';
-                    if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
-                    var fd = new FormData(form);
-                    var body = new URLSearchParams(fd).toString();
-                    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })
-                        .then(function(r) {
-                            if (r.ok) {
-                                if (successMsg) { successMsg.classList.add('show'); successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
-                                form.reset();
-                            } else { if (successMsg) { successMsg.textContent = 'Something went wrong. Please call us or email directly.'; successMsg.classList.add('show'); } }
-                        })
-                        .catch(function() { if (successMsg) { successMsg.textContent = 'Network error. Please call 77150 29932 or email us.'; successMsg.classList.add('show'); } })
-                        .finally(function() { if (btn) { btn.disabled = false; btn.textContent = origText; } });
-                });
-            }
-        })();
     </script>
 </body>
 </html>
