@@ -68,8 +68,18 @@
             font-weight: 800;
             color: var(--white);
             letter-spacing: -0.03em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
         }
         .logo span { color: var(--red-soft); }
+        .nav-logo-img {
+            height: 36px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
         .nav-links {
             display: flex;
             gap: 2rem;
@@ -422,7 +432,10 @@
     </script>
 
     <nav>
-        <a href="#" class="logo">HARI RAMA <span>LOGISTICS</span></a>
+        <a href="#" class="logo">
+            <img src="logo.png" alt="Hari Rama Logistics" class="nav-logo-img">
+            HARI RAMA <span>LOGISTICS</span>
+        </a>
         <div class="nav-links">
             <a href="#services">Services</a>
             <a href="#why-us">Why Us</a>
