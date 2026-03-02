@@ -537,7 +537,7 @@
             <h3>Send an Enquiry</h3>
             <p class="form-intro">Fill the form below and we'll get back to you soon.</p>
             <div id="form-success-msg" class="form-success">Thank you! We've received your enquiry and will contact you shortly.</div>
-            <form class="form-box" id="enquiry-form-el" name="enquiry" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/#contact">
+            <form class="form-box" id="enquiry-form-el" name="enquiry" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/">
                 <input type="hidden" name="form-name" value="enquiry">
                 <p class="form-honey" style="position:absolute;left:-9999px;" aria-hidden="true"><label>Don't fill this: <input name="bot-field"></label></p>
                 <div class="form-row">
@@ -603,6 +603,26 @@
             if (window.location.hash === '#contact' && window.location.search.indexOf('enquiry=sent') !== -1 && successMsg) {
                 successMsg.classList.add('show');
                 successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            var form = document.getElementById('enquiry-form-el');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    var btn = form.querySelector('button[type="submit"]');
+                    var origText = btn ? btn.textContent : '';
+                    if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+                    var fd = new FormData(form);
+                    var body = new URLSearchParams(fd).toString();
+                    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body })
+                        .then(function(r) {
+                            if (r.ok) {
+                                if (successMsg) { successMsg.classList.add('show'); successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+                                form.reset();
+                            } else { if (successMsg) { successMsg.textContent = 'Something went wrong. Please call us or email directly.'; successMsg.classList.add('show'); } }
+                        })
+                        .catch(function() { if (successMsg) { successMsg.textContent = 'Network error. Please call 77150 29932 or email us.'; successMsg.classList.add('show'); } })
+                        .finally(function() { if (btn) { btn.disabled = false; btn.textContent = origText; } });
+                });
             }
         })();
     </script>
